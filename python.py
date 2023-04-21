@@ -119,7 +119,7 @@ def process_material_builder(mat_builder, mat_network):
         standard_surface.setInput(45, displacement_node, 0)
 
     # Check if the original Principled Shader has a transparency map enabled and create a new octane::NT_TEX_IMAGE node if so
-    if copied_shader.parm("transparency_texture").eval():
+    if copied_shader.parm("opaccolor_useTexture").eval():
         octane_transparency = new_octane_vopnet.createNode("octane::NT_TEX_IMAGE")
         octane_transparency.setName("Opacity")
         octane_transparency.parm("colorSpace").set("NAMED_COLOR_SPACE_OTHER")
@@ -129,7 +129,7 @@ def process_material_builder(mat_builder, mat_network):
 
         # Copy the texture file path from the original Principled Shader to the octane::NT_TEX_IMAGE node
         copy_texture_file_path(
-            copied_shader, "transparency_texture", octane_transparency
+            copied_shader, "opaccolor_texture", octane_transparency
         )
 
 
